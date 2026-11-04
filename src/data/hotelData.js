@@ -1571,14 +1571,18 @@ export const getHotelsForCity = (city) => {
 
   // Personalise the fallback hotel names with the city name
   const personalize = (hotels) =>
-    hotels.map(h => ({
-      ...h,
-      name: h.name.replace(
-        /Hotel|Resort|Inn|Lodge|Guest House/,
-        (match) => `${match}`
-      ),
-      location: h.location.includes(city) ? h.location : `${h.location}, ${city}`
-    }));
+    hotels.map((h, idx) => {
+      const keywords = /(Hotel|Resort|Inn|Lodge|Guest House|Homestay|Retreat|Hostel|Palace|Heritage|Cottage|Villa|Niwas|Sadan|Dham)/i;
+      const hasKeyword = keywords.test(h.name);
+      const personalizedName = hasKeyword
+        ? h.name.replace(keywords, `${city} $1`)
+        : `${city} ${h.name}`;
+      return {
+        ...h,
+        name: personalizedName,
+        location: h.location.includes(city) ? h.location : `${city} — ${h.location}`
+      };
+    });
 
   return {
     budget:   personalize(template.budget),
