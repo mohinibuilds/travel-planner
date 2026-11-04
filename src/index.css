@@ -1,0 +1,301 @@
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TRAVELEASE — MakeMyTrip-inspired Design System
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Inter font — loaded via index.html, fallback to system fonts */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #F0F4FF;
+  color: #1A1A2E;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Design Tokens ──────────────────────────────────────────────────────────── */
+:root {
+  /* MMT-inspired brand palette */
+  --primary:        #1A56DB;   /* MMT Blue */
+  --primary-dark:   #1340B0;
+  --primary-light:  #EEF3FF;
+  --secondary:      #E84393;   /* MMT Pink/Red accent */
+  --accent:         #FF6B00;   /* Orange — offers/deals */
+  --success:        #05A660;
+  --warning:        #F59E0B;
+  --danger:         #EF4444;
+  --info:           #06B6D4;
+
+  /* Surfaces */
+  --bg:             #F0F4FF;
+  --bg-dark:        #0A1628;
+  --card:           #FFFFFF;
+  --card-hover:     #FAFBFF;
+
+  /* Text */
+  --text:           #1A1A2E;
+  --text-light:     #64748B;
+  --text-muted:     #94A3B8;
+  --text-white:     #FFFFFF;
+
+  /* Borders */
+  --border:         #E2E8F0;
+  --border-focus:   #1A56DB;
+
+  /* Shadows */
+  --shadow-xs:  0 1px 2px rgba(0,0,0,0.06);
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.08);
+  --shadow:     0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg:  0 8px 30px rgba(0,0,0,0.12);
+  --shadow-xl:  0 20px 60px rgba(0,0,0,0.15);
+
+  /* Radii */
+  --r-sm:  6px;
+  --r:     12px;
+  --r-lg:  16px;
+  --r-xl:  24px;
+  --r-full: 9999px;
+
+  /* MMT Gradient */
+  --grad-brand:  linear-gradient(135deg, #1A56DB 0%, #1340B0 50%, #0E2D8A 100%);
+  --grad-sunset: linear-gradient(135deg, #E84393 0%, #FF6B00 100%);
+  --grad-ocean:  linear-gradient(135deg, #06B6D4 0%, #1A56DB 100%);
+  --grad-green:  linear-gradient(135deg, #05A660 0%, #06B6D4 100%);
+  --grad-card:   linear-gradient(145deg, #FFFFFF 0%, #F8FAFF 100%);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Bottom nav height (for mobile spacing) */
+  --bottom-nav-h: 64px;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #F1F5F9; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* ── Cards ──────────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card:hover { box-shadow: var(--shadow); }
+
+/* ── Buttons ────────────────────────────────────────────────────────────────── */
+.btn-primary {
+  background: var(--grad-brand);
+  color: white;
+  border: none;
+  padding: 13px 28px;
+  border-radius: var(--r);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.2px;
+  box-shadow: 0 4px 14px rgba(26, 86, 219, 0.4);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 86, 219, 0.5);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 11px 24px;
+  border-radius: var(--r);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-secondary:hover { background: var(--primary); color: white; transform: translateY(-1px); }
+
+/* ── Form Elements ──────────────────────────────────────────────────────────── */
+input, select {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  background: white;
+  transition: all 0.2s;
+  outline: none;
+  box-shadow: var(--shadow-xs);
+}
+input:focus, select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.12);
+}
+input.error, select.error { border-color: var(--danger); }
+.error-msg { color: var(--danger); font-size: 12px; margin-top: 4px; display: block; }
+
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* ── Page Layout ────────────────────────────────────────────────────────────── */
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 20px;
+  padding-bottom: calc(28px + var(--bottom-nav-h));
+}
+
+/* ── Typography ─────────────────────────────────────────────────────────────── */
+.section-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+}
+.section-subtitle {
+  color: var(--text-light);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* ── Step Indicator ─────────────────────────────────────────────────────────── */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.step {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: var(--r-full);
+  font-size: 12px; font-weight: 700;
+  background: white; border: 2px solid var(--border);
+  color: var(--text-light); letter-spacing: 0.2px;
+}
+.step.active  { background: var(--primary); border-color: var(--primary); color: white; }
+.step.completed { background: #DCFCE7; border-color: var(--success); color: var(--success); }
+.step-arrow { color: #CBD5E1; font-size: 16px; }
+
+/* ── Badge ──────────────────────────────────────────────────────────────────── */
+.badge {
+  padding: 3px 10px; border-radius: var(--r-full);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.3px;
+}
+
+/* ── Gradient BG ────────────────────────────────────────────────────────────── */
+.gradient-bg { background: var(--grad-brand); }
+
+/* ── Nav Actions ────────────────────────────────────────────────────────────── */
+.nav-actions {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-top: 32px; flex-wrap: wrap;
+}
+.select-hint { color: var(--text-light); font-size: 14px; font-weight: 500; }
+
+/* ── Passenger Control ──────────────────────────────────────────────────────── */
+.passenger-control {
+  display: flex; align-items: center; gap: 12px;
+  background: white; border: 1.5px solid var(--border);
+  border-radius: var(--r); padding: 8px 16px; width: fit-content;
+}
+.passenger-control button {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid var(--primary); background: var(--primary-light);
+  color: var(--primary); font-size: 18px; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.passenger-control button:hover { background: var(--primary); color: white; }
+.passenger-control span { font-size: 16px; font-weight: 700; min-width: 24px; text-align: center; }
+
+/* ── Form Group ─────────────────────────────────────────────────────────────── */
+.form-group { display: flex; flex-direction: column; }
+
+/* ── Empty State ────────────────────────────────────────────────────────────── */
+.empty-state {
+  text-align: center; padding: 60px 40px;
+}
+.empty-icon { font-size: 56px; margin-bottom: 16px; }
+.empty-state h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.empty-state p  { color: var(--text-light); margin-bottom: 24px; }
+
+/* ── Animations ─────────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.3s ease; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.slide-up { animation: slideUp 0.4s ease; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.04); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── MMT-style offer chip ───────────────────────────────────────────────────── */
+.offer-chip {
+  background: linear-gradient(135deg, #FF6B00, #FF8F00);
+  color: white; font-size: 10px; font-weight: 800;
+  padding: 2px 8px; border-radius: var(--r-full);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+
+/* ── Safe area for notch phones ─────────────────────────────────────────────── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .page-container {
+    padding-bottom: calc(28px + var(--bottom-nav-h) + env(safe-area-inset-bottom));
+  }
+}

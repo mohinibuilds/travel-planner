@@ -1,0 +1,416 @@
+/* Route Header */
+.route-header {
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.route-display {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.city-box {
+  text-align: center;
+}
+
+.city-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-light);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.city-name {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.route-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.route-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  flex-shrink: 0;
+}
+
+.route-track {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.route-dist {
+  background: white;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  position: absolute;
+}
+
+.trip-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.meta-item {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-light);
+  background: var(--bg);
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+/* Transport Grid */
+.transport-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.transport-card {
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.transport-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--mode-color, var(--primary));
+}
+
+.transport-card.selected {
+  border-color: var(--mode-color, var(--primary));
+  background: linear-gradient(135deg, #FAFFFE, #F0F9FF);
+}
+
+.selected-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--success);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.transport-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.transport-emoji {
+  font-size: 40px;
+  width: 56px;
+  height: 56px;
+  background: var(--bg);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transport-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.transport-duration {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+.price-section {
+  margin-bottom: 16px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--text-light);
+  border-bottom: 1px dashed #f1f5f9;
+}
+
+.price-row:last-child { border-bottom: none; }
+
+.price-row.total {
+  background: #F8FAFC;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  border-bottom: none;
+  margin-top: 4px;
+}
+
+.price-val {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.price-val.highlight {
+  color: var(--primary);
+  font-size: 17px;
+}
+
+.features-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.feature-chip {
+  background: #EFF6FF;
+  color: var(--primary);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.transport-card.selected .feature-chip {
+  background: rgba(37, 99, 235, 0.1);
+}
+
+/* Navigation */
+.nav-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+}
+
+.select-hint {
+  color: var(--text-light);
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 40px;
+  max-width: 400px;
+  margin: 60px auto;
+}
+
+.empty-icon {
+  font-size: 60px;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
+
+@media (max-width: 700px) {
+  .route-header { flex-direction: column; }
+  .transport-grid { grid-template-columns: 1fr; }
+  .nav-actions { flex-direction: column; gap: 12px; }
+}
+
+/* ── Unavailable transport mode ──────────────────────────────────────── */
+.transport-card.unavailable {
+  background: #F8FAFC;
+  cursor: not-allowed;
+  border-color: #E2E8F0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.transport-card.unavailable:hover {
+  border-color: #E2E8F0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.unavailable-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #FEE2E2;
+  color: #DC2626;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.transport-unavail-reason {
+  font-size: 12px;
+  color: #DC2626;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.unavail-body {
+  margin-top: 8px;
+  padding: 14px;
+  background: #FFF5F5;
+  border-radius: 8px;
+  border: 1px dashed #FECACA;
+}
+
+.unavail-msg {
+  font-size: 13px;
+  color: #B91C1C;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.unavail-suggest {
+  font-size: 12px;
+  color: #6B7280;
+  font-style: italic;
+}
+
+/* ── Availability Summary ─────────────────────────────────────────────── */
+.availability-summary {
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+.avail-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+
+.avail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.avail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.avail-yes {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: #15803D;
+}
+
+.avail-no {
+  background: #FFF5F5;
+  border: 1px solid #FECACA;
+  color: #9CA3AF;
+}
+
+.avail-badge {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.badge-yes {
+  background: #DCFCE7;
+  color: #16A34A;
+}
+
+.badge-no {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+/* ── No-airport notice banner ─────────────────────────────────────────── */
+.no-airport-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #FFFBEB;
+  border: 1.5px solid #FCD34D;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #92400E;
+  line-height: 1.5;
+}
+
+.no-airport-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Recommended badge on bus card ───────────────────────────────────── */
+.transport-card.recommended {
+  border-color: #F59E0B !important;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+
+.recommended-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #FEF3C7;
+  color: #B45309;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid #FCD34D;
+}
