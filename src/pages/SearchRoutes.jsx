@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTrip } from "../context/TripContext";
 import { getDistance } from "../data/travelData";
 import { allCities, citiesByState } from "../data/multiHopData.js";
+import RouteMap from "../components/RouteMap";
 import "./SearchRoutes.css";
 
 const SearchRoutes = () => {
@@ -167,46 +168,52 @@ const SearchRoutes = () => {
           </button>
         </div>
 
-        {/* Info Panel */}
+        {/* Route Map Panel */}
         <div className="info-panel">
-          <div className="card info-card">
-            <h3>🚀 Transport Options Available</h3>
-            <div className="transport-list">
-              {[
-                { icon: "✈️", name: "Flight", note: "Fastest option" },
-                { icon: "🚂", name: "Train", note: "Economical & scenic" },
-                { icon: "🚌", name: "Bus", note: "Budget friendly" },
-                { icon: "🚗", name: "Car", note: "Private & flexible" }
-              ].map((t, i) => (
-                <div key={i} className="transport-item">
-                  <span className="t-icon">{t.icon}</span>
-                  <div>
-                    <div className="t-name">{t.name}</div>
-                    <div className="t-note">{t.note}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <RouteMap fromCity={tripDetails.from} toCity={tripDetails.to} />
 
-          <div className="card info-card mt16">
-            <h3>🏨 Hotel Categories</h3>
-            <div className="hotel-list">
-              {[
-                { icon: "🏨", name: "Budget", price: "₹500–₹1,500/night", stars: "2-3 ★" },
-                { icon: "🏩", name: "Standard", price: "₹1,500–₹4,000/night", stars: "3-4 ★" },
-                { icon: "🏰", name: "Luxury", price: "₹4,000–₹15,000/night", stars: "4-5 ★" }
-              ].map((h, i) => (
-                <div key={i} className="hotel-item">
-                  <span className="h-icon">{h.icon}</span>
-                  <div>
-                    <div className="h-name">{h.name} <span className="h-stars">{h.stars}</span></div>
-                    <div className="h-price">{h.price}</div>
-                  </div>
+          {!(tripDetails.from && tripDetails.to) && (
+            <>
+              <div className="card info-card mt16">
+                <h3>🚀 Transport Options Available</h3>
+                <div className="transport-list">
+                  {[
+                    { icon: "✈️", name: "Flight", note: "Fastest option" },
+                    { icon: "🚂", name: "Train", note: "Economical & scenic" },
+                    { icon: "🚌", name: "Bus", note: "Budget friendly" },
+                    { icon: "🚗", name: "Car", note: "Private & flexible" }
+                  ].map((t, i) => (
+                    <div key={i} className="transport-item">
+                      <span className="t-icon">{t.icon}</span>
+                      <div>
+                        <div className="t-name">{t.name}</div>
+                        <div className="t-note">{t.note}</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
+
+              <div className="card info-card mt16">
+                <h3>🏨 Hotel Categories</h3>
+                <div className="hotel-list">
+                  {[
+                    { icon: "🏨", name: "Budget", price: "₹500–₹1,500/night", stars: "2-3 ★" },
+                    { icon: "🏩", name: "Standard", price: "₹1,500–₹4,000/night", stars: "3-4 ★" },
+                    { icon: "🏰", name: "Luxury", price: "₹4,000–₹15,000/night", stars: "4-5 ★" }
+                  ].map((h, i) => (
+                    <div key={i} className="hotel-item">
+                      <span className="h-icon">{h.icon}</span>
+                      <div>
+                        <div className="h-name">{h.name} <span className="h-stars">{h.stars}</span></div>
+                        <div className="h-price">{h.price}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
