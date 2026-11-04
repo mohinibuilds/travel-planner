@@ -233,3 +233,69 @@
   .hotels-grid { grid-template-columns: 1fr; }
   .nav-actions { flex-direction: column; gap: 12px; }
 }
+
+/* ── Interactive Map ────────────────────────────────────────────────────── */
+.hotel-map-wrapper {
+  padding: 18px 20px 20px;
+  margin-bottom: 28px;
+}
+
+.hotel-map-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.map-active-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 3px 10px;
+  border-radius: var(--r-full);
+}
+
+.map-no-coords {
+  text-align: center;
+  padding: 16px;
+  font-size: 13px;
+  color: var(--text-light);
+  background: #F8FAFC;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* Leaflet popup override */
+.leaflet-popup-content-wrapper {
+  border-radius: 10px !important;
+  box-shadow: var(--shadow-lg) !important;
+  font-family: inherit !important;
+}
+.leaflet-popup-content {
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+  margin: 10px 14px !important;
+}
+
+/* ── Map-highlighted hotel card ─────────────────────────────────────────── */
+.hotel-card.map-highlighted {
+  border-color: var(--info) !important;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.18) !important;
+}
+
+.h-map-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #CFFAFE;
+  color: #0E7490;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
