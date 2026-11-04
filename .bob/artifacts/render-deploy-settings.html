@@ -1,0 +1,88 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Render Settings</title>
+<style>
+  body { font-family: -apple-system, "Segoe UI", sans-serif; background: #f0f4ff; margin: 0; padding: 24px; }
+  .container { max-width: 620px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 6px; }
+  p { color: #64748b; font-size: 14px; margin-bottom: 24px; }
+  .field { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 18px 20px; margin-bottom: 14px; }
+  .field-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .field-value { font-size: 18px; font-weight: 800; color: #1a1a2e; font-family: monospace; background: #f0f4ff; padding: 10px 16px; border-radius: 8px; border: 2px solid #1a56db; display: flex; align-items: center; justify-content: space-between; }
+  .field-value span { color: #1a56db; }
+  .badge { background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; font-family: sans-serif; }
+  .badge-red { background: #fee2e2; color: #dc2626; }
+  .note { font-size: 13px; color: #64748b; margin-top: 8px; }
+  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+  .step-num { width: 28px; height: 28px; background: #1a56db; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; }
+  .step-text { font-size: 14px; color: #1a1a2e; padding-top: 4px; line-height: 1.5; }
+  .highlight { color: #1a56db; font-weight: 700; }
+  .btn-section { background: #1a56db; border-radius: 12px; padding: 18px 20px; margin-top: 20px; color: white; text-align: center; }
+  .btn-section h3 { font-size: 16px; margin-bottom: 6px; }
+  .btn-section p { color: rgba(255,255,255,0.8); margin: 0; font-size: 13px; }
+  hr { border: none; border-top: 1px solid #e2e8f0; margin: 20px 0; }
+  footer { text-align: center; font-size: 12px; color: #94a3b8; border-top: 1px solid #e5e7eb; margin-top: 32px; padding-top: 16px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>✅ Render Deploy Settings</h1>
+  <p>खालील values exactly copy करा आणि Render form मध्ये paste करा.</p>
+
+  <div class="field">
+    <div class="field-label">📝 Name</div>
+    <div class="field-value"><span>travel-planner</span> <span class="badge">✓ Already filled</span></div>
+    <div class="note">हे आधीच भरलेले आहे — बदलू नका</div>
+  </div>
+
+  <div class="field">
+    <div class="field-label">🌿 Branch</div>
+    <div class="field-value"><span>master</span> <span class="badge">✓ Already filled</span></div>
+    <div class="note">हे आधीच भरलेले आहे — बदलू नका</div>
+  </div>
+
+  <div class="field">
+    <div class="field-label">⚙️ Build Command</div>
+    <div class="field-value"><span>npm install; npm run build</span> <span class="badge">✓ Already filled</span></div>
+    <div class="note">हे आधीच भरलेले आहे — बदलू नका</div>
+  </div>
+
+  <div class="field" style="border-color:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,0.15)">
+    <div class="field-label" style="color:#dc2626">🚨 Publish Directory — हे भरायचे आहे!</div>
+    <div class="field-value" style="border-color:#dc2626;background:#fff5f5"><span style="color:#dc2626;font-size:24px;letter-spacing:2px">dist</span> <span class="badge badge-red">← हे type करा</span></div>
+    <div class="note" style="color:#dc2626;font-weight:600">⚠️ "Publish Directory" field मध्ये फक्त <strong>dist</strong> लिहा</div>
+  </div>
+
+  <hr />
+
+  <h2 style="font-size:16px;font-weight:800;margin-bottom:14px">📋 Final Steps</h2>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-text"><span class="highlight">"Publish Directory"</span> field मध्ये <span class="highlight">dist</span> type करा</div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-text">Environment Variables — काही भरायची नाही, blank सोडा</div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-text">खाली scroll करा → <span class="highlight">"Create Static Site"</span> button click करा</div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-text">3 मिनिटे wait करा — Build होईल आणि live link मिळेल 🎉</div>
+  </div>
+
+  <div class="btn-section">
+    <h3>🎉 Deploy झाल्यावर link मिळेल</h3>
+    <p>https://travel-planner-xxxx.onrender.com — हे link friend ला share करा!</p>
+  </div>
+
+  <footer>Made with IBM Bob</footer>
+</div>
+</body>
+</html>

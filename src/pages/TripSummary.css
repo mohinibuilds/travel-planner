@@ -307,10 +307,15 @@
 
 /* Print Styles */
 @media print {
-  .nav-actions, .summary-actions, .cost-actions, .step-indicator,
-  .savings-section { display: none !important; }
-  .cost-card { position: static; }
-  .summary-layout { grid-template-columns: 1fr 1fr; }
+  body { font-size: 12px !important; }
+  .navbar, .bottom-nav, .nav-actions, .summary-actions,
+  .cost-actions, .step-indicator, .savings-section,
+  .stats-card { display: none !important; }
+  .cost-card  { position: static !important; box-shadow: none !important; }
+  .summary-layout { grid-template-columns: 1fr 1fr !important; gap: 16px !important; }
+  .summary-card, .cost-card { break-inside: avoid; border: 1px solid #e5e7eb !important; box-shadow: none !important; }
+  .cost-card-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page-container { padding: 16px !important; }
 }
 
 @media (max-width: 960px) {

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTrip } from "../context/TripContext";
 import "./AIItinerary.css";
 
 const interests = [
@@ -59,6 +61,8 @@ const generatePlan = (interest, days, budget, weather) => {
 };
 
 const AIItinerary = () => {
+  const navigate = useNavigate();
+  const { setTripDetails } = useTrip();
   const [step, setStep] = useState(1);
   const [destination, setDestination] = useState("");
   const [days, setDays] = useState(3);
@@ -212,6 +216,13 @@ const AIItinerary = () => {
               </div>
             </div>
           ))}
+
+          <div className="plan-actions-row" style={{ display:"flex", gap:12, marginBottom:16 }}>
+            <button className="btn-primary" onClick={() => { setTripDetails(prev => ({...prev, to: destination})); navigate("/search"); }}>
+              ✈️ Book This Trip
+            </button>
+            <button className="btn-secondary" onClick={() => setStep(1)}>✏️ Change Plan</button>
+          </div>
 
           <div className="budget-breakdown card">
             <div className="section-title">💰 Budget Breakdown</div>

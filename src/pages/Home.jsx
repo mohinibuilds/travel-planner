@@ -296,7 +296,10 @@ const Home = () => {
         <div className="footer-links">
           <a href="/search">Plan Trip</a>
           <a href="/multihop">Multi-Hop</a>
-          <a href="/itinerary">Itinerary</a>
+          <a href="/ai-plan">AI Planner</a>
+          <a href="/offbeat">Hidden Gems</a>
+          <a href="/group">Group Trip</a>
+          <a href="/budget">Budget</a>
           <a href="/zerofee">Zero Fee</a>
           <a href="/summary">My Trip</a>
         </div>

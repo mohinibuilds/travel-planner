@@ -27,6 +27,46 @@ const localTransport = {
     { mode: "BEST Bus",    from: "₹5",  note: "AC: ₹15" },
     { mode: "Auto",        from: "₹30", note: "Meter is mandatory" },
   ],
+  "Delhi":   [
+    { mode: "Metro",       from: "₹10", note: "Fastest — covers most tourist spots" },
+    { mode: "DTC Bus",     from: "₹5",  note: "AC buses available on key routes" },
+    { mode: "Auto",        from: "₹25", note: "Use Ola/Uber to avoid overcharging" },
+  ],
+  "Pune":    [
+    { mode: "PMPML Bus",   from: "₹5",  note: "Extensive city network" },
+    { mode: "Auto",        from: "₹20", note: "Meter mandatory by law" },
+    { mode: "Rapido/OLA",  from: "₹60", note: "Bike taxi — quickest for short hops" },
+  ],
+  "Hyderabad": [
+    { mode: "Metro",       from: "₹10", note: "3 lines — covers IT hub & old city" },
+    { mode: "TSRTC Bus",   from: "₹5",  note: "AC Pushpak buses available" },
+    { mode: "Auto",        from: "₹25", note: "Insist on meter in Hyderabad" },
+  ],
+  "Bangalore": [
+    { mode: "Metro",       from: "₹10", note: "Green + Purple line covers key areas" },
+    { mode: "BMTC Bus",    from: "₹5",  note: "Volvo AC buses on major routes" },
+    { mode: "OLA/Uber",    from: "₹80", note: "Most convenient option" },
+  ],
+  "Chennai":  [
+    { mode: "MTC Bus",     from: "₹5",  note: "Very extensive network" },
+    { mode: "Metro",       from: "₹10", note: "Connects Airport to city centre" },
+    { mode: "Share Auto",  from: "₹15", note: "Fixed routes, very cheap" },
+  ],
+  "Kolkata":  [
+    { mode: "Metro",       from: "₹5",  note: "Oldest metro in India — very reliable" },
+    { mode: "Yellow Taxi", from: "₹50", note: "Iconic Ambassadors — always metered" },
+    { mode: "Tram",        from: "₹5",  note: "Unique to Kolkata — heritage route" },
+  ],
+  "Shimla":   [
+    { mode: "Toy Train",   from: "₹35", note: "UNESCO heritage — Kalka to Shimla" },
+    { mode: "HRTC Bus",    from: "₹20", note: "Connects all nearby areas" },
+    { mode: "Taxi",        from: "₹300",note: "Kufri / Naldehra day trips" },
+  ],
+  "Udaipur":  [
+    { mode: "E-Rickshaw",  from: "₹20", note: "Around the lake area — clean option" },
+    { mode: "Auto",        from: "₹40", note: "Short city hops" },
+    { mode: "Boat",        from: "₹200",note: "Sunset cruise on Lake Pichola — unmissable!" },
+  ],
   "Default": [
     { mode: "Auto/Rickshaw", from: "₹20–50", note: "Negotiate fare before boarding" },
     { mode: "City Bus",      from: "₹5–20",  note: "Cheap but can be crowded" },

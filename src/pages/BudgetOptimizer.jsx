@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTrip } from "../context/TripContext";
 import "./BudgetOptimizer.css";
 
 const destinations = [
@@ -27,11 +29,18 @@ const priceHistory = {
 const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
 const BudgetOptimizer = () => {
+  const navigate = useNavigate();
+  const { setTripDetails } = useTrip();
   const [budget, setBudget] = useState(10000);
   const [days, setDays]     = useState(3);
   const [from, setFrom]     = useState("Mumbai");
   const [results, setResults] = useState(null);
   const [priceAlert, setPriceAlert] = useState(null);
+
+  const planThisTrip = (dest) => {
+    setTripDetails(prev => ({ ...prev, from, to: dest.name }));
+    navigate("/search");
+  };
 
   const handleFind = () => {
     const found = destinations.filter(d => {
@@ -148,7 +157,7 @@ const BudgetOptimizer = () => {
                 <div className="bud-saving">
                   💚 Savings: ₹{d.saving.toLocaleString()} left over
                 </div>
-                <button className="btn-primary bud-plan-btn">✈️ Plan This Trip</button>
+                <button className="btn-primary bud-plan-btn" onClick={() => planThisTrip(d)}>✈️ Plan This Trip</button>
               </div>
             ))}
           </div>

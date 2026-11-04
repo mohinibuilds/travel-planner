@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTrip } from "../context/TripContext";
 import "./OffbeatGems.css";
 
 const regions = ["All", "Himalayas", "Rajasthan", "Western Ghats", "Northeast India", "Coastal", "Central India"];
@@ -103,9 +105,18 @@ const gems = [
 ];
 
 const OffbeatGems = () => {
+  const navigate = useNavigate();
+  const { setTripDetails } = useTrip();
   const [activeRegion, setActiveRegion] = useState("All");
   const [showHidden, setShowHidden] = useState(false);
   const [expanded, setExpanded] = useState(null);
+
+  const planTrip = (gemName) => {
+    // Extract city name (before comma if present)
+    const city = gemName.split(",")[0].trim();
+    setTripDetails(prev => ({ ...prev, to: city }));
+    navigate("/search");
+  };
 
   const filtered = gems.filter(g => {
     if (showHidden && !g.hidden) return false;
@@ -172,7 +183,7 @@ const OffbeatGems = () => {
                     <div className="gd-val">{gem.guide}</div>
                   </div>
                 </div>
-                <button className="btn-primary gem-plan-btn">✈️ Plan a Trip Here</button>
+                <button className="btn-primary gem-plan-btn" onClick={(e) => { e.stopPropagation(); planTrip(gem.name); }}>✈️ Plan a Trip Here</button>
               </div>
             )}
 
