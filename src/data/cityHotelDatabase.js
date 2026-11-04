@@ -404,41 +404,54 @@ const fallback = {
   },
 };
 
+// ── VERIFIED CITIES SET ────────────────────────────────────────────────────
+// Only cities in this set have real, professor-verified hotel data.
+// Any city NOT in this set must show a "no verified hotels" alert — never fake data.
+export const VERIFIED_CITIES = new Set(Object.keys(cityHotelDB));
+
+// Cities explicitly known to have NO hotels / very small villages.
+// Listing them prevents partial-match false-positives (e.g. "Jafrabad" ≠ "Jafrabad" partial).
+export const NO_HOTEL_CITIES = new Set([
+  "Ghansawangi",
+  "Ambad",
+  "Partur",
+  "Georai",
+  "Mantha",
+  "Badnapur",
+  "Bhokardan Village",
+  "Wadi",
+  "Kasarwadi",
+]);
+
 // ── MAIN EXPORT ────────────────────────────────────────────────────────────
-// Returns { budget, standard, luxury } with real addresses + coordinates
-// Falls back to personalized templates for unknown cities
+// Returns:
+//   { budget, standard, luxury }  — if city has VERIFIED hotels
+//   null                          — if city is unverified / has no hotel data
+//
+// NEVER returns personalized fake names. Professor requirement: blank alert state
+// for any city not in VERIFIED_CITIES.
 
 export const getHotelsForDestination = (city) => {
-  if (!city) return fallback.town;
+  if (!city) return null;
 
-  // 1. Direct match
+  // 1. Direct match (exact — case sensitive)
   if (cityHotelDB[city]) return cityHotelDB[city];
 
-  // 2. Case-insensitive
+  // 2. Case-insensitive exact match
   const key = Object.keys(cityHotelDB).find(
     k => k.toLowerCase() === city.toLowerCase()
   );
   if (key) return cityHotelDB[key];
 
-  // 3. Partial match
-  const partial = Object.keys(cityHotelDB).find(
-    k => city.toLowerCase().includes(k.toLowerCase()) || k.toLowerCase().includes(city.toLowerCase())
-  );
-  if (partial) return cityHotelDB[partial];
+  // 3. No verified data found → return null (caller shows blank alert)
+  return null;
+};
 
-  // 4. Personalized fallback
-  const type = classify(city);
-  const tpl  = fallback[type];
-  const personalize = (hotels) => hotels.map(h => ({
-    ...h,
-    name:     personalizeName(h.name, city),
-    address:  `${city} — ${h.address}`,
-  }));
-  return {
-    budget:   personalize(tpl.budget),
-    standard: personalize(tpl.standard),
-    luxury:   personalize(tpl.luxury),
-  };
+// ── isVerifiedCity ─────────────────────────────────────────────────────────
+export const isVerifiedCity = (city) => {
+  if (!city) return false;
+  if (VERIFIED_CITIES.has(city)) return true;
+  return !!Object.keys(cityHotelDB).find(k => k.toLowerCase() === city.toLowerCase());
 };
 
 export const getCityCentre = (city) => {

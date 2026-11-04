@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import { useTrip } from "../context/TripContext";
 import { hotelCategories } from "../data/travelData";
-import { getHotelsForDestination, getCityCentre } from "../data/cityHotelDatabase";
+import { getHotelsForDestination, getCityCentre, isVerifiedCity } from "../data/cityHotelDatabase";
 import "leaflet/dist/leaflet.css";
 import "./HotelBooking.css";
 
@@ -61,15 +61,17 @@ const HotelBooking = () => {
   } = useTrip();
 
   const destinationCity = tripDetails.to;
+  const verified = isVerifiedCity(destinationCity);
 
-  // Dynamic hotel data filtered for THIS city
+  // Dynamic hotel data filtered for THIS city (null = no verified data)
   const [cityHotels, setCityHotels] = useState(() => getHotelsForDestination(destinationCity));
   const [mapCentre,  setMapCentre]  = useState(() => getCityCentre(destinationCity));
-  const [activeMarker, setActiveMarker] = useState(null); // { lat, lng, name }
+  const [activeMarker, setActiveMarker] = useState(null);
 
   // Re-fetch whenever destination changes
   useEffect(() => {
-    setCityHotels(getHotelsForDestination(destinationCity));
+    const hotels = getHotelsForDestination(destinationCity);
+    setCityHotels(hotels);
     setMapCentre(getCityCentre(destinationCity));
     setActiveMarker(null);
     setSelectedHotel(null);
@@ -105,15 +107,69 @@ const HotelBooking = () => {
   };
 
   // Collect all hotels with real coordinates for map markers
-  const allHotelsFlat = Object.entries(hotelCategories).flatMap(([catKey]) =>
-    (cityHotels[catKey] || [])
-      .filter(h => h.lat && h.lng)
-      .map((h, idx) => {
-        const count = (cityHotels[catKey] || []).length;
-        const { price } = calcPrice(catKey, idx, count, hotelNights, hotelRooms);
-        return { ...h, catKey, idx, count, price };
-      })
-  );
+  const allHotelsFlat = cityHotels
+    ? Object.entries(hotelCategories).flatMap(([catKey]) =>
+        (cityHotels[catKey] || [])
+          .filter(h => h.lat && h.lng)
+          .map((h, idx) => {
+            const count = (cityHotels[catKey] || []).length;
+            const { price } = calcPrice(catKey, idx, count, hotelNights, hotelRooms);
+            return { ...h, catKey, idx, count, price };
+          })
+      )
+    : [];
+
+  // ── No verified hotels: show blank alert state ──────────────────────────
+  if (!cityHotels) {
+    return (
+      <div className="page-container fade-in">
+        <div className="step-indicator">
+          <div className="step completed"><span>✓</span> Route</div>
+          <div className="step-arrow">›</div>
+          <div className="step completed"><span>✓</span> Transport</div>
+          <div className="step-arrow">›</div>
+          <div className="step active"><span>3</span> Hotel</div>
+          <div className="step-arrow">›</div>
+          <div className="step"><span>4</span> Summary</div>
+        </div>
+
+        {/* ── Blank fallback alert — Tailwind ── */}
+        <div className="mt-8 rounded-2xl border-2 border-dashed border-amber-300 bg-amber-50 p-8 text-center">
+          <div className="text-5xl mb-4">🏨</div>
+          <h2 className="text-xl font-bold text-amber-800 mb-2">
+            No Verified Hotels Found for "{destinationCity}"
+          </h2>
+          <p className="text-amber-700 text-sm mb-1">
+            This city / town / village does not yet have verified hotel information in our database.
+          </p>
+          <p className="text-amber-600 text-xs mb-6">
+            We only show real, verified hotel data — we never display unconfirmed listings.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <button
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg text-sm transition-colors"
+              onClick={() => navigate("/transport")}
+            >
+              ← Back to Transport
+            </button>
+            <button
+              className="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-5 py-2 rounded-lg text-sm transition-colors"
+              onClick={() => navigate("/summary")}
+            >
+              Skip Hotel → View Summary
+            </button>
+          </div>
+          <p className="mt-5 text-xs text-amber-500">
+            Verified cities include: Jalna · Deulgaon Raja · Jafrabad · Bhokardan · Aurangabad · Mumbai · Pune · Delhi + more
+          </p>
+        </div>
+
+        <div className="nav-actions mt-6">
+          <button className="btn-secondary" onClick={() => navigate("/transport")}>← Back</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="page-container fade-in">
@@ -128,7 +184,13 @@ const HotelBooking = () => {
         <div className="step"><span>4</span> Summary</div>
       </div>
 
-      <h2 className="section-title">Book Your Hotel</h2>
+      {/* Verified badge */}
+      <div className="flex items-center gap-2 mb-2">
+        <h2 className="section-title mb-0">Book Your Hotel</h2>
+        <span className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full">
+          ✓ Verified Data
+        </span>
+      </div>
       <p className="section-subtitle">Showing real hotels in <strong>{destinationCity}</strong></p>
 
       {/* Stay Duration Controls */}
@@ -249,9 +311,19 @@ const HotelBooking = () => {
 
                     <div className="hotel-card-header">
                       <div className="hotel-card-name">{hotel.name}</div>
-                      <div className="hotel-card-rating">
-                        ⭐ {hotel.rating}
-                        <span className="hotel-reviews">({hotel.reviews.toLocaleString()} reviews)</span>
+                      {/* Star rating — Tailwind */}
+                      <div className="flex items-center gap-1.5 mt-1">
+                        <div className="flex">
+                          {[1,2,3,4,5].map(s => (
+                            <svg key={s} className={`w-3.5 h-3.5 ${s <= Math.round(hotel.rating) ? "text-yellow-400" : "text-gray-300"}`}
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                          ))}
+                        </div>
+                        <span className="text-xs font-semibold text-gray-700">{hotel.rating}</span>
+                        <span className="text-xs text-gray-400">({hotel.reviews.toLocaleString()})</span>
+                        <span className="ml-1 text-xs bg-green-50 text-green-700 border border-green-200 rounded px-1.5 py-0.5 font-medium">✓ Verified</span>
                       </div>
                     </div>
 
