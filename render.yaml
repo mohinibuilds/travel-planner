@@ -1,7 +1,8 @@
 services:
   - type: web
-    name: travelease
+    name: travel-planner
     env: static
+    buildCommand: npm install && npm run build
     staticPublishPath: ./dist
     routes:
       - type: rewrite
