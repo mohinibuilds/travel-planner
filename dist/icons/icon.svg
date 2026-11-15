@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background circle -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A56DB"/>
+      <stop offset="100%" style="stop-color:#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="plane" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E0F2FE"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+  <!-- Decorative arc / route line -->
+  <path d="M 90 380 Q 256 120 420 380" stroke="rgba(255,255,255,0.25)" stroke-width="8" fill="none" stroke-dasharray="18 12"/>
+  <!-- Airplane body -->
+  <g transform="translate(256,230) rotate(-35) scale(1.15)">
+    <!-- Body -->
+    <ellipse cx="0" cy="0" rx="80" ry="26" fill="white"/>
+    <!-- Nose -->
+    <ellipse cx="72" cy="0" rx="22" ry="18" fill="white"/>
+    <!-- Main wing -->
+    <path d="M 10,-4 L 35,-70 L 55,-70 L 30,6 Z" fill="rgba(255,255,255,0.85)"/>
+    <path d="M 10,4  L 35,70  L 55,70  L 30,-6 Z" fill="rgba(255,255,255,0.85)"/>
+    <!-- Tail fin -->
+    <path d="M -60,-4 L -78,-36 L -52,-36 L -40,0 Z" fill="rgba(255,255,255,0.9)"/>
+    <path d="M -60,4  L -78,36  L -52,36  L -40,0 Z" fill="rgba(255,255,255,0.7)"/>
+    <!-- Window row -->
+    <circle cx="30" cy="0" r="7" fill="#1A56DB"/>
+    <circle cx="14" cy="0" r="7" fill="#1A56DB"/>
+    <circle cx="-2" cy="0" r="7" fill="#1A56DB"/>
+  </g>
+  <!-- Location pin at destination -->
+  <g transform="translate(370,310)">
+    <circle cx="0" cy="0" r="26" fill="white" opacity="0.95"/>
+    <circle cx="0" cy="-5" r="14" fill="#1A56DB"/>
+    <circle cx="0" cy="-5" r="6" fill="white"/>
+    <path d="M -12,5 Q 0,30 0,30 Q 0,30 12,5 Z" fill="#1A56DB"/>
+  </g>
+  <!-- Small dots for route points -->
+  <circle cx="110" cy="370" r="12" fill="rgba(255,255,255,0.7)"/>
+  <circle cx="256" cy="170" r="8"  fill="rgba(255,255,255,0.5)"/>
+  <!-- App name text -->
+  <text x="256" y="455" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="58" fill="white" letter-spacing="2">TravelEase</text>
+</svg>
