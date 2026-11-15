@@ -1,0 +1,162 @@
+/* ── Welcome Screen ─────────────────────────────────────────────────────── */
+.welcome-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f172a;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle radial glow behind the card */
+.welcome-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(26,86,219,0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(124,92,237,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Card */
+.welcome-card {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px 32px 32px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.welcome-card--in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Logo */
+.welcome-logo-wrap {
+  width: 72px;
+  height: 72px;
+  background: #EFF6FF;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  border: 2px solid #DBEAFE;
+}
+.welcome-logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+/* Brand name */
+.welcome-brand {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 4px;
+  letter-spacing: -0.5px;
+}
+.welcome-tagline {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0 0 20px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Divider */
+.welcome-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 0 0 20px;
+}
+
+/* Features */
+.welcome-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.welcome-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #334155;
+  font-weight: 500;
+}
+.wf-icon {
+  font-size: 18px;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Buttons */
+.welcome-btn-primary {
+  display: block;
+  width: 100%;
+  background: #1A56DB;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background 0.18s;
+  letter-spacing: 0.2px;
+}
+.welcome-btn-primary:hover {
+  background: #1648c0;
+}
+
+.welcome-btn-skip {
+  display: block;
+  width: 100%;
+  background: transparent;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.18s, color 0.18s;
+}
+.welcome-btn-skip:hover {
+  border-color: #94a3b8;
+  color: #334155;
+}
+
+/* Footer note */
+.welcome-note {
+  margin: 16px 0 0;
+  font-size: 11px;
+  color: #94a3b8;
+  letter-spacing: 0.3px;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .welcome-card {
+    padding: 32px 20px 24px;
+    border-radius: 16px;
+  }
+  .welcome-brand { font-size: 24px; }
+}
